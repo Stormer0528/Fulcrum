@@ -226,7 +226,7 @@ namespace {
             isCore = subversion.startsWith("/Satoshi:");
             isBU = subversion.startsWith("/BCH Unlimited:");
             isBCHN = subversion.startsWith("/Bitcoin Cash Node:");
-            isLTC = subversion.startsWith("/LitecoinCore:");
+            isLTC = subversion.startsWith("/TexitCoinCore:");
             isFlowee = subversion.startsWith("/Flowee:");
             // regular bitcoind, "version" is reliable and always the same format
             version = Version::BitcoinDCompact(val);
