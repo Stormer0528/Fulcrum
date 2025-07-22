@@ -7,7 +7,7 @@
 #define BITCOIN_PRIMITIVES_PUREHEADER_H
 
 #include "serialize.h"
-#include <uint256.h>
+#include "uint256.h"
 
 namespace bitcoin
 {

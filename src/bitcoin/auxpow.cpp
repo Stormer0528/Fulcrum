@@ -5,12 +5,14 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
-#include <auxpow.h>
+#include "auxpow.h"
 
-#include <hash.h>
-#include <algorithm>
+#include "hash.h"
 #include "block.h"
 #include "merkle.h"
+
+#include <algorithm>
+
 
 /* Moved from wallet.cpp.  CMerkleTx is necessary for auxpow, independent
    of an enabled (or disabled) wallet.  Always include the code.  */

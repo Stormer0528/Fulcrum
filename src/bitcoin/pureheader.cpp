@@ -4,9 +4,9 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "pureheader.h"
+#include "crypto/scrypt.h"
+#include "hash.h"
 
-#include <hash.h>
-#include <crypto/scrypt.h>
 #include <assert.h>
 
 namespace bitcoin
