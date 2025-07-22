@@ -55,7 +55,9 @@ public:
                 auxpow.reset(new CAuxPow());
             }
             assert(auxpow);
-            READWRITE(*auxpow);
+            if (ser_action.ForRead()) {
+                READWRITE(*auxpow);
+            }
         } else if (ser_action.ForRead()) {
             auxpow.reset();
         }
@@ -134,7 +136,18 @@ public:
         fChecked = false;
     }
 
-    CBlockHeader GetBlockHeader() const { return *this; }
+    CBlockHeader GetBlockHeader() const
+    {
+        CBlockHeader block;
+        block.nVersion       = nVersion;
+        block.hashPrevBlock  = hashPrevBlock;
+        block.hashMerkleRoot = hashMerkleRoot;
+        block.nTime          = nTime;
+        block.nBits          = nBits;
+        block.nNonce         = nNonce;
+        // block.auxpow         = auxpow;
+        return block;
+    }
 
     std::string ToString(bool fVerbose = false) const;
 };
