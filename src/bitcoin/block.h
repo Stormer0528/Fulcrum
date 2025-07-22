@@ -8,8 +8,14 @@
 #include "transaction.h"
 #include "serialize.h"
 #include "uint256.h"
+#include "auxpow.h"
 
 #include <utility>
+#include <memory>
+
+// Forward declaration if CAuxPow is defined elsewhere
+class CAuxPow;
+
 
 namespace bitcoin {
 /**
@@ -20,7 +26,7 @@ namespace bitcoin {
  * the block is a special one that creates a new coin owned by the creator of
  * the block.
  */
-class CBlockHeader {
+class CBlockHeader : public CPureBlockHeader{
 public:
     // header
     int32_t nVersion;
@@ -29,6 +35,8 @@ public:
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
+    // auxpow (if this is a merge-minded block)
+    std::shared_ptr<CAuxPow> auxpow;
 
     CBlockHeader() noexcept { SetNull(); }
 
@@ -39,6 +47,18 @@ public:
         READWRITE(obj.nTime);
         READWRITE(obj.nBits);
         READWRITE(obj.nNonce);
+
+        std::shared_ptr<CAuxPow> &auxpow = const_cast<std::shared_ptr<CAuxPow>&>(obj.auxpow);
+
+        if (obj.IsAuxpow()) {
+            if (ser_action.ForRead()) {
+                auxpow.reset(new CAuxPow());
+            }
+            assert(auxpow);
+            READWRITE(*auxpow);
+        } else if (ser_action.ForRead()) {
+            auxpow.reset();
+        }
     }
 
     void SetNull() noexcept {
@@ -55,6 +75,22 @@ public:
     uint256 GetHash() const;
 
     int64_t GetBlockTime() const noexcept { return int64_t(nTime); }
+
+    /**
+     * Check if the auxpow flag is set in the version.
+     * @return True if this block version is marked as auxpow.
+     */
+    inline bool IsAuxpow() const
+    {
+        return nVersion & VERSION_AUXPOW;
+    }
+
+    /**
+     * Set the block's auxpow (or unset it).  This takes care of updating
+     * the version accordingly.
+     * @param apow Pointer to the auxpow to use or NULL.
+     */
+    void SetAuxpow(CAuxPow* apow);
 };
 
 class CBlock : public CBlockHeader {

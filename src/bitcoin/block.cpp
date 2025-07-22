@@ -29,4 +29,17 @@ std::string CBlock::ToString(bool fVerbose) const {
     return s.str();
 }
 
+void CBlockHeader::SetAuxpow (CAuxPow* apow)
+{
+    if (apow)
+    {
+        auxpow.reset(apow);
+        SetAuxpowFlag(true);
+    } else
+    {
+        auxpow.reset();
+        SetAuxpowFlag(false);
+    }
+}
+
 } // end namespace bitcoin

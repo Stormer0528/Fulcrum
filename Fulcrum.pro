@@ -440,6 +440,7 @@ contains(DEFINES, ENABLE_TESTS) {
 # Bitcoin related sources & headers
 SOURCES += \
     bitcoin/amount.cpp \
+    bitcoin/auxpow.cpp \
     bitcoin/base58.cpp \
     bitcoin/block.cpp \
     bitcoin/cashaddr.cpp \
@@ -450,13 +451,16 @@ SOURCES += \
     bitcoin/crypto/hmac_sha256.cpp \
     bitcoin/crypto/hmac_sha512.cpp \
     bitcoin/crypto/ripemd160.cpp \
+    bitcoin/crypto/scrypt.cpp \
     bitcoin/crypto/sha1.cpp \
     bitcoin/crypto/sha256.cpp \
     bitcoin/crypto/sha256_sse4.cpp \
     bitcoin/crypto/sha512.cpp \
     bitcoin/hash.cpp \
     bitcoin/interpreter.cpp \
+    bitcoin/merkle.cpp \
     bitcoin/pubkey.cpp \
+    bitcoin/pureheader.cpp \
     bitcoin/script.cpp \
     bitcoin/script_error.cpp \
     bitcoin/script_standard.cpp \
@@ -470,6 +474,7 @@ SOURCES += \
 
 HEADERS += \
     bitcoin/amount.h \
+    bitcoin/auxpow.h \
     bitcoin/base58.h \
     bitcoin/block.h \
     bitcoin/cashaddr.h \
@@ -485,6 +490,7 @@ HEADERS += \
     bitcoin/crypto/hmac_sha256.h \
     bitcoin/crypto/hmac_sha512.h \
     bitcoin/crypto/ripemd160.h \
+    bitcoin/crypto/scrypt.h \
     bitcoin/crypto/sha1.h \
     bitcoin/crypto/sha256.h \
     bitcoin/crypto/sha512.h \
@@ -494,6 +500,8 @@ HEADERS += \
     bitcoin/litecoin_bits.h \
     bitcoin/prevector.h \
     bitcoin/pubkey.h \
+    bitcoin/pureheader.h \
+    bitcoin/merkle.h \
     bitcoin/reverse_iterator.h \
     bitcoin/rpc/protocol.h \
     bitcoin/script.h \

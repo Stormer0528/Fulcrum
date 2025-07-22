@@ -62,6 +62,7 @@ public:
 
     SERIALIZE_METHODS(COutPoint, obj) { READWRITE(obj.txid, obj.n); }
 
+    void SetNull() { txid.SetNull(); n = NULL_INDEX; }
     bool IsNull() const { return txid.IsNull() && n == NULL_INDEX; }
 
     const TxId &GetTxId() const { return txid; }
