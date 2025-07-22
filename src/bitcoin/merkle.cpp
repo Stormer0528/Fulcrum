@@ -1,6 +1,6 @@
 
 #include "merkle.h"
-#include "sha256.h"
+#include "crypto/sha256.h"
 
 #pragma once
 namespace bitcoin
